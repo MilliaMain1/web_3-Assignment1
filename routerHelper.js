@@ -47,7 +47,7 @@ const RouterBuilder = class {
     }
 
     //Adds route to search by field
-    addSearchByField(fieldName, routePath) {
+    addSearchByField(routePath, fieldName) {
         this.router.get(routePath, async (req, res) => {
             await this.handleQuery(res, 
                 this.supabase

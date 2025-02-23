@@ -10,7 +10,7 @@
       in
       pkgs.writeShellScriptBin "my-script" ''
         # Base URL
-        BASE_URL="http://localhost:3000/api"
+        BASE_URL="https://web-3-assignment1.onrender.com/api"
 
         # Define an array of paths
         PATHS=(

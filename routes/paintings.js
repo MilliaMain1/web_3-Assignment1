@@ -16,6 +16,7 @@ module.exports = (supabase) => {
                 .gte("yearOfWork", req.params.start)
                 .lte("yearOfWork", req.params.end)
     )
+    .addSearchByField("/search/:substring", "title") 
     .addSearchOnJoin("/galleries/:id", "galleryId")
     .addSearchOnJoin("/artist/:id", "artistId")
     

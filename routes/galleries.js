@@ -6,6 +6,6 @@ module.exports = (supabase) => {
     return new RouterBuilder(supabase, "galleries", "galleryId")
         .addGetAll()
         .addGetById()
-        .addSearchByField("galleryCountry", "/country/:substring")
+        .addSearchByField("/country/:substring", "galleryCountry")
         .build()
 };
