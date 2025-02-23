@@ -67,14 +67,14 @@ const RouterBuilder = class {
                     .from(this.table)
                     .select(this.defaultFields)
                     .order(sortField, { ascending: true }),
-                ignoreSort = true
+                true
             );
         });
         return this;
     }
     //Adds a sort route that sorts on mapped fields
     addGetAllSortedMapped(fieldMappings) {
-        this.router.get("sort/:field", async (req, res) => {
+        this.router.get("/sort/:field", async (req, res) => {
             
             let userField = req.params.field
             let sortField = fieldMappings[userField]
@@ -89,8 +89,8 @@ const RouterBuilder = class {
                 this.supabase
                     .from(this.table)
                     .select(this.defaultFields)
-                    .order(sortField, { ascending: true }), 
-                ignoreSort = true) 
+                    .order(sortField, { ascending: true }),
+                true) 
         })
         return this
     }

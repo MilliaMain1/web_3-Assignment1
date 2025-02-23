@@ -20,7 +20,7 @@ module.exports = (supabase) => {
     .addSearchOnJoin("/galleries/:id", "galleryId")
     .addSearchOnJoin("/artist/:id", "artistId")
     
-    .addCustomQuery("/artists/country/:substring", 
+    .addCustomQuery("/artist/country/:substring", 
             (supabase, req) => {
                 return supabase
                     .from("paintings")
