@@ -19,6 +19,7 @@ const RouterBuilder = class {
         }
         const { data, error } = await query;
         if (error) return res.status(500).json({error: error.message});
+        if (Array.isArray(data) && data.length === 0) return res.status(404).json({error: "Unable to find data"});
         res.json(data); 
     }
 
@@ -114,8 +115,12 @@ const RouterBuilder = class {
     //Adds a custom query
     addCustomQuery(path, queryFunction) {
         this.router.get(path, async (req, res) => {
-            const query = queryFunction(this.supabase, req);
-            await this.handleQuery(res, query, true);
+            try{
+                const query = queryFunction(this.supabase, req);
+                await this.handleQuery(res, query, true);
+            }catch(err) {
+                res.status(400).json({error: err.message})
+            } 
         });
         return this;
     }

@@ -9,13 +9,16 @@ module.exports = (supabase) => {
         title: "title",
         year: "yearOfWork"
     })
-    .addCustomQuery("/years/:start/:end", (supabase, req) => 
-            supabase
+    .addCustomQuery("/years/:start/:end", (supabase, req) => {
+            if(parseInt(req.params.start) > parseInt(req.params.end)){
+                throw Error("Start year must be less than the end year")
+            } 
+            return supabase
                 .from("paintings")
                 .select("paintingId, title, yearOfWork")
                 .gte("yearOfWork", req.params.start)
                 .lte("yearOfWork", req.params.end)
-    )
+    })
     .addSearchByField("/search/:substring", "title") 
     .addSearchOnJoin("/galleries/:id", "galleryId")
     .addSearchOnJoin("/artist/:id", "artistId")
