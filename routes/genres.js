@@ -4,7 +4,7 @@ module.exports = (supabase) => {
     return new RouterBuilder(supabase, "genres", "genreId", defaultFields)
         .addGetAll()
         .addGetById()
-        .addCustomQuery("/paintings/:id", 
+        .addCustomQuery("/painting/:id", 
             (supabase, req) => {
                 const id = req.params.id;
                 return supabase
