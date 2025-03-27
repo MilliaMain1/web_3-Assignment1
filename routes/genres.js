@@ -1,5 +1,5 @@
 const {RouterBuilder} = require("../routerHelper.js");
-const defaultFields = "genreId, genreName, era:eraId(*)";
+const defaultFields = "genreId, genreName, description, wikiLink, era:eraId(*)";
 module.exports = (supabase) => {
     return new RouterBuilder(supabase, "genres", "genreId", defaultFields)
         .addGetAll()

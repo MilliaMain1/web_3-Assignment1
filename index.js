@@ -1,4 +1,6 @@
 const express = require("express");
+const cors = require("cors");
+
 const { createClient } = require("@supabase/supabase-js");
 const erasRouter = require("./routes/eras.js");
 const galleriesRouter = require("./routes/galleries.js");
@@ -6,7 +8,10 @@ const artistsRouter = require("./routes/artists.js");
 const paintingsRouter = require("./routes/paintings.js");
 const genresRouter = require("./routes/genres.js")
 const countsRouter = require("./routes/counts.js");
+
 const app = express();
+app.use(cors());
+
 const PORT = process.env.PORT || 3000;
 
 const SUPABASE_URL =  process.env.SUPABASE_URL;

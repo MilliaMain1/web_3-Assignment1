@@ -1,5 +1,6 @@
 const { RouterBuilder } = require("../routerHelper")
 const defaultFields = "paintingId, title, yearOfWork, imageFileName, gallery:galleryId(*), artist:artistId(*)" 
+const fullFields = "paintingId, title, gallery:galleryId(*), artist:artistId(*), yearOfWork, museumLink, copyrightText, description, medium, wikiLink, imageFileName"
 
 module.exports = (supabase) => {
     return new RouterBuilder(supabase, "paintings", "paintingId", defaultFields, "title")
@@ -22,7 +23,15 @@ module.exports = (supabase) => {
     .addSearchByField("/search/:substring", "title") 
     .addSearchOnJoin("/galleries/:id", "galleryId")
     .addSearchOnJoin("/artist/:id", "artistId")
-    
+    .addCustomQuery("/full/:id",
+        (supabase, req) => {
+            return supabase
+                .from("paintings")
+                .select(fullFields)
+                .eq("paintingId", req.params.id)
+                .limit(1)
+                .single()
+        }) 
     .addCustomQuery("/artist/country/:substring", 
             (supabase, req) => {
                 return supabase
