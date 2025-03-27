@@ -47,7 +47,7 @@ module.exports = (supabase) => {
                 .select(
                     "paintings(paintingId, title, yearOfWork), genres!inner()"
                 )
-                .eq("genres.eraId", genreId)
+                .eq("genres.genreId", genreId)
                 .order("paintings(yearOfWork)", { ascending: true })
                 .then((result) => {
                     if(result.error) return result;
