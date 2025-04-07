@@ -45,7 +45,7 @@ module.exports = (supabase) => {
             return supabase
                 .from("paintingGenres")
                 .select(
-                    "paintings(paintingId, title, yearOfWork), genres!inner()"
+                    `paintings(${defaultFields}), genres!inner()`
                 )
                 .eq("genres.genreId", genreId)
                 .order("paintings(yearOfWork)", { ascending: true })
@@ -61,7 +61,7 @@ module.exports = (supabase) => {
             return supabase
                 .from("paintingGenres")
                 .select(
-                    "paintings(paintingId, title, yearOfWork), genres!inner()"
+                    `paintings(${defaultFields}), genres!inner()`
                 )
                 .eq("genres.eraId", eraId)
                 .order("paintings(yearOfWork)", { ascending: true })
